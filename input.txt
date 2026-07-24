@@ -1,0 +1,17 @@
+0010  COPY     START   0000
+0020           LDX     #0
+0030           LDA     #0
+0040           +LDB    #TABLE2
+0050           BASE    TABLE2
+0060  LOOP     ADD     TABLE,X
+0070           ADD     TABLE2,X
+0080           CADD    A,COUNT,Z
+0090           TIX     COUNT
+0100           JLT     LOOP
+0110           +STA    TOTAL
+0120           RSUB
+0130  COUNT    RESW    1
+0140  TABLE    RESW    2000
+0150  TABLE2   RESW    2000
+0160  TOTAL    RESW    1
+0170           END     COPY

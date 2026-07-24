@@ -1,0 +1,5 @@
+LOOP       000A
+COUNT      0021
+TABLE      0024
+TABLE2     1794
+TOTAL      2F04

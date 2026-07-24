@@ -1,0 +1,22 @@
+0010  COPY     START   1000
+0020  FIRST    STL     RETADR
+0030           LDB     #LENGTH
+0040           BASE    LENGTH
+0050           +JSUB   RDREC
+0060           LDA     LENGTH
+0070           COMP    #0
+0080           JEQ     ENDFIL
+0090           +JSUB   WRREC
+0100           J       FIRST
+0110  ENDFIL   LDA     =C'EOF'
+0120           STA     BUFFER
+0130           LDA     =X'05'
+0140           STA     LENGTH
+0150           +JSUB   WRREC
+0160           J       @RETADR
+0170  RETADR   RESW    1
+0180  LENGTH   RESW    1
+0190  BUFFER   RESB    4096
+0200  RDREC    EQU     *
+0210  WRREC    EQU     *
+0220           END     COPY

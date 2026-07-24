@@ -1,0 +1,17 @@
+0000  COPY    START   0000      
+0000          LDX     #0        050000
+0003          LDA     #0        010000
+0006          +LDB    #TABLE2   69101794
+000A          BASE    TABLE2    
+000A  LOOP    ADD     TABLE,X   1BA017
+000D          ADD     TABLE2,X  1BC794
+0010          CADD    A,COUNT,Z BC000021
+0014          TIX     COUNT     2F200A
+0017          JLT     LOOP      3B2FF0
+001A          +STA    TOTAL     0F102F04
+001E          RSUB              4F0000
+0021  COUNT   RESW    1         
+0024  TABLE   RESW    2000      
+1794  TABLE2  RESW    2000      
+2F04  TOTAL   RESW    1         
+2F07          END     COPY      
