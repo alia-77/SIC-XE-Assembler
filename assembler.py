@@ -315,6 +315,18 @@ def write_outputs(p1, p2, symtab, progname, start_addr):
 
     prog_len = end_loc - start_addr
 
+    # account for literals placed after END (i.e. no LTORG before END was hit)
+    for lit, addr in LITTAB.items():
+        if lit.startswith("=C'"):
+            lit_len = len(lit[3:-1])
+        elif lit.startswith("=X'"):
+            lit_len = len(lit[3:-1]) // 2
+        else:
+            lit_len = 1
+        lit_end = addr + lit_len
+        if lit_end - start_addr > prog_len:
+            prog_len = lit_end - start_addr
+
     with open("HTME.txt", 'w') as f:
         # prog_len = p2[-1][0] + 3 - start_addr
         f.write(f"H^{progname}^{start_addr:06X}^{prog_len:06X}\n")
